@@ -32,18 +32,13 @@ git config --global credential.helper store
 
 ## 步骤 4: 推送代码到 GitHub
 
-运行以下命令：
-```
-git push -u origin main
-```
+已完成以下操作：
+- 删除了冲突的 index.html、CNAME 和 README.md 文件
+- 推送代码到 main 分支
 
-首次推送时，系统会提示您输入用户名和密码：
-- 用户名：LIAMLDH
-- 密码：输入您生成的个人访问令牌
+## 步骤 5: 启用 GitHub Pages（重要！）
 
-## 步骤 5: 启用 GitHub Pages
-
-1. 推送成功后，转到 GitHub 仓库页面
+1. 访问 https://github.com/LIAMLDH/LIAMLDH.github.io
 2. 点击 "Settings" 选项卡
 3. 向下滚动到 "Pages" 部分
 4. 在 "Source" 下拉菜单中选择 "Deploy from a branch"
@@ -54,15 +49,40 @@ git push -u origin main
 
 1. GitHub Actions 会自动检测到新的提交
 2. 工作流将在 `.github/workflows/deploy.yml` 中定义
-3. 构建过程可能需要几分钟时间
+3. 构建过程可能需要 5-10 分钟时间
 4. 构建完成后，您会在仓库的 Actions 标签页中看到成功状态
 
-## 步骤 7: 访问您的网站
+## 步骤 7: 检查 GitHub Actions 构建状态
+
+1. 在仓库页面点击 "Actions" 标签
+2. 查看最近的构建工作流是否成功
+3. 如果失败，查看日志以解决问题
+
+## 步骤 8: 访问您的网站
 
 1. 构建完成后，您的网站将在以下地址可用：
    https://LIAMLDH.github.io
    
 2. 注意：首次部署可能需要 5-10 分钟生效
+
+## 解决 404 错误
+
+如果您看到 404 错误，请检查以下几点：
+
+1. **确认 GitHub Pages 已启用**：
+   - 检查 Settings > Pages 中是否选择了正确的源分支 (gh-pages)
+
+2. **等待构建完成**：
+   - 首次部署需要等待 GitHub Actions 完成构建
+   - 检查仓库的 Actions 标签页确认构建是否成功
+
+3. **检查文件结构**：
+   - 确保 main 分支不包含 index.html 等冲突文件
+   - 这些文件已在本次配置中删除
+
+4. **分支问题**：
+   - 确认您的 main 分支已推送成功
+   - 检查是否存在 gh-pages 分支
 
 ## 重要说明
 
