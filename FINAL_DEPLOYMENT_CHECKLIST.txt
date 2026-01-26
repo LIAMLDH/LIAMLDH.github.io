@@ -5,10 +5,10 @@
 ### 1. 项目结构配置
 - [x] Vue 项目位于 student-vue 目录
 - [x] Vite 配置已设置 base: '/' 以适应 GitHub Pages 用户页面
-- [x] API 请求配置正确
+- [x] API 请求配置正确，支持生产和开发环境
 
 ### 2. GitHub Actions 自动化
-- [x] 工作流文件已放置在 .github/workflows/deploy.yml
+- [x] 工作流文件已放置在 .github/workflows/deploy.yml (在仓库根目录)
 - [x] 工作流配置正确，会在 main 分支更新时触发构建
 - [x] 构建输出会发布到 gh-pages 分支
 
@@ -17,7 +17,12 @@
 - [x] 删除了 CNAME 文件
 - [x] 删除了其他可能冲突的静态文件
 
-### 4. 代码推送
+### 4. 环境配置
+- [x] 添加了 .env.production 和 .env.development 环境配置文件
+- [x] API 请求配置已更新以使用环境变量
+- [x] 生产环境中使用相对路径，开发环境中使用 localhost:8081
+
+### 5. 代码推送
 - [x] 所有更改已提交到 main 分支
 - [x] 代码已成功推送到 GitHub 仓库
 

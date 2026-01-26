@@ -18,13 +18,15 @@ jobs:
         
     - name: Install dependencies
       run: npm install
+      working-directory: ./student-vue
       
     - name: Build
       run: npm run build
+      working-directory: ./student-vue
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+        publish_dir: ./student-vue/dist
         publish_branch: gh-pages
