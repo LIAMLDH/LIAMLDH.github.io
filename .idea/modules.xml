@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/student-class.iml" filepath="$PROJECT_DIR$/student-class.iml" />
+      <module fileurl="file://$PROJECT_DIR$/student-vue/student-vue.iml" filepath="$PROJECT_DIR$/student-vue/student-vue.iml" />
+    </modules>
+  </component>
+</project>
