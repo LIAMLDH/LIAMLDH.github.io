@@ -1,0 +1,63 @@
+# 最终部署检查清单
+
+## 已完成的配置
+
+### 1. 项目结构配置
+- [x] Vue 项目位于 student-vue 目录
+- [x] Vite 配置已设置 base: '/' 以适应 GitHub Pages 用户页面
+- [x] API 请求配置正确
+
+### 2. GitHub Actions 自动化
+- [x] 工作流文件已放置在 .github/workflows/deploy.yml
+- [x] 工作流配置正确，会在 main 分支更新时触发构建
+- [x] 构建输出会发布到 gh-pages 分支
+
+### 3. 冲突文件清理
+- [x] 删除了根目录的 index.html（原"我的个人网站"文件）
+- [x] 删除了 CNAME 文件
+- [x] 删除了其他可能冲突的静态文件
+
+### 4. 代码推送
+- [x] 所有更改已提交到 main 分支
+- [x] 代码已成功推送到 GitHub 仓库
+
+## 需要在 GitHub 上完成的步骤
+
+### 1. 启用 GitHub Pages
+- [ ] 访问 https://github.com/LIAMLDH/LIAMLDH.github.io
+- [ ] 点击 Settings > Pages
+- [ ] 确保 Source 设置为 "Deploy from a branch"
+- [ ] 选择 "gh-pages" 分支和 "/ (root)" 文件夹
+- [ ] 点击 "Save"
+
+### 2. 检查 GitHub Actions
+- [ ] 访问仓库的 Actions 标签页
+- [ ] 查找 "Deploy to GitHub Pages" 工作流
+- [ ] 确认工作流运行成功
+- [ ] 等待工作流完成构建过程
+
+### 3. 验证部署
+- [ ] 等待 5-10 分钟让 GitHub Pages 生效
+- [ ] 访问 https://LIAMLDH.github.io
+- [ ] 确认显示学生选课管理系统界面
+
+## 预期结果
+
+成功部署后，您应该能够：
+1. 访问 https://LIAMLDH.github.io
+2. 看到学生选课管理系统的登录界面
+3. 能够使用系统的前端功能（注意：后端 API 需要单独部署才能使用完整功能）
+
+## 注意事项
+
+- GitHub Pages 只托管前端静态文件，后端 API 需要单独部署
+- 首次部署可能需要几分钟时间生效
+- 如果仍然看到 404 错误，请检查 GitHub Pages 设置是否正确
+
+## 故障排除
+
+如果网站仍无法访问：
+1. 检查 GitHub Pages 是否已正确启用
+2. 确认 Actions 工作流是否成功运行
+3. 等待足够的时间让更改生效
+4. 查看 Actions 日志是否有错误信息

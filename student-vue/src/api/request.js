@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // 创建axios实例
 const request = axios.create({
-  baseURL: 'http://localhost:8081',  // 更新为后端服务的实际端口
+  baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8081',  // 生产环境使用相对路径，开发环境使用本地后端
   timeout: 60000,
   headers: {
     'Content-Type': 'application/json'
