@@ -1,0 +1,87 @@
+# GitHub Pages 部署完整步骤指南
+
+## 步骤 1: 准备 GitHub 仓库
+
+1. 登录 GitHub，创建一个名为 `LIAMLDH.github.io` 的新仓库
+2. 不要初始化仓库（不要添加 README、.gitignore 或 license）
+3. 确保仓库名称与您的 GitHub 用户名完全匹配
+
+## 步骤 2: 配置本地 Git 仓库
+
+已完成以下配置：
+- 初始化了 Git 仓库
+- 添加了所有项目文件
+- 提交了更改
+- 设置了远程仓库地址为 https://github.com/LIAMLDH/LIAMLDH.github.io.git
+
+## 步骤 3: 配置 GitHub 身份验证
+
+### 方法 1：使用个人访问令牌（推荐）
+
+1. 访问 GitHub -> Settings -> Developer settings -> Personal access tokens -> Tokens (classic)
+2. 点击 "Generate new token"
+3. 选择适当的权限（至少包括 repo 和 workflow 权限）
+4. 复制生成的令牌
+
+### 方法 2：配置凭据助手
+
+在终端运行：
+```
+git config --global credential.helper store
+```
+
+## 步骤 4: 推送代码到 GitHub
+
+运行以下命令：
+```
+git push -u origin main
+```
+
+首次推送时，系统会提示您输入用户名和密码：
+- 用户名：LIAMLDH
+- 密码：输入您生成的个人访问令牌
+
+## 步骤 5: 启用 GitHub Pages
+
+1. 推送成功后，转到 GitHub 仓库页面
+2. 点击 "Settings" 选项卡
+3. 向下滚动到 "Pages" 部分
+4. 在 "Source" 下拉菜单中选择 "Deploy from a branch"
+5. 选择 "gh-pages" 分支和 "/ (root)" 文件夹
+6. 点击 "Save" 保存设置
+
+## 步骤 6: 等待自动构建
+
+1. GitHub Actions 会自动检测到新的提交
+2. 工作流将在 `.github/workflows/deploy.yml` 中定义
+3. 构建过程可能需要几分钟时间
+4. 构建完成后，您会在仓库的 Actions 标签页中看到成功状态
+
+## 步骤 7: 访问您的网站
+
+1. 构建完成后，您的网站将在以下地址可用：
+   https://LIAMLDH.github.io
+   
+2. 注意：首次部署可能需要 5-10 分钟生效
+
+## 重要说明
+
+1. 由于 GitHub Pages 只能托管静态文件，前端界面将正常显示
+2. 后端 API 功能将不可用，除非您单独部署后端服务
+3. 如需完整功能，需要将 Spring Boot 后端部署到其他支持 Java 的平台
+
+## 故障排除
+
+### 如果推送失败：
+- 确保您有对仓库的写入权限
+- 检查仓库名称是否正确（必须是 LIAMLDH.github.io）
+- 验证个人访问令牌权限是否足够
+
+### 如果网站无法访问：
+- 检查 GitHub Pages 是否已正确启用
+- 确认 "gh-pages" 分支是否存在
+- 查看 Actions 中的工作流是否成功完成
+
+### 如果前端无法连接后端：
+- 在生产环境中需要更新 API 基础 URL
+- 修改 student-vue/src/api/request.js 中的 baseURL 为实际后端地址
