@@ -5,16 +5,20 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
     
@@ -27,32 +31,48 @@ jobs:
       run: npm install
       working-directory: ./student-vue
       
-    - name: Build
+    - name: Build frontend
       run: npm run build
       working-directory: ./student-vue
       
-    - name: Debug - Check directory structure
-      run: ls -la ./student-vue/dist
+    - name: Verify build output
+      run: |
+        echo "=== Checking build directory structure ==="
+        ls -la ./student-vue/dist
+        echo "=== Checking for index.html ==="
+        if [ -f ./student-vue/dist/index.html ]; then
+          echo "✅ index.html found"
+          head -20 ./student-vue/dist/index.html
+        else
+          echo "❌ index.html not found"
+          exit 1
+        fi
       
-    - name: Debug - Check git status
-      run: git status
+    - name: Deploy using gh-pages branch
+      run: |
+        echo "=== Starting deployment ==="
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        echo "=== Creating gh-pages branch ==="
+        git checkout --orphan gh-pages
+        git rm -rf .
+        
+        echo "=== Copying build files ==="
+        cp -r ./student-vue/dist/* .
+        
+        echo "=== Checking files to commit ==="
+        ls -la
+        
+        echo "=== Committing changes ==="
+        git add .
+        git commit -m "Deploy to GitHub Pages"
+        
+        echo "=== Pushing to gh-pages branch ==="
+        git push -f origin gh-pages
       
-    - name: Debug - Check git remote
-      run: git remote -v
-      
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: ./student-vue/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    
-    steps:
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+    - name: Verify deployment
+      run: |
+        echo "=== Deployment completed ==="
+        echo "Check your GitHub Pages settings at: https://github.com/LIAMLDH/LIAMLDH.github.io/settings/pages"
+        echo "Your site should be available at: https://LIAMLDH.github.io"
