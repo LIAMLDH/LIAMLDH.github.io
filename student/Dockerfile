@@ -23,6 +23,16 @@ EXPOSE 8080
 # 设置环境变量
 ENV SERVER_PORT=8080
 ENV SPRING_PROFILES_ACTIVE=production
+ENV SPRING_DATASOURCE_URL=jdbc:h2:mem:student_course_management
+ENV SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver
+ENV SPRING_DATASOURCE_USERNAME=sa
+ENV SPRING_DATASOURCE_PASSWORD=
+ENV SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+ENV SPRING_JPA_SHOW_SQL=true
+ENV SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.H2Dialect
 
-# 运行应用
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# 增强启动配置
+ENV JAVA_OPTS="-Xmx512m -Xms256m -Djava.net.preferIPv4Stack=true"
+
+# 运行应用（添加详细日志）
+ENTRYPOINT ["sh", "-c", "echo 'Starting application...'; echo 'Environment variables:'; env | grep -E 'SPRING_|SERVER_'; echo 'Java options: $JAVA_OPTS'; java $JAVA_OPTS -jar app.jar"]
