@@ -12,9 +12,6 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
     - name: Checkout repository
@@ -48,28 +45,17 @@ jobs:
           exit 1
         fi
       
-    - name: Deploy using gh-pages branch
-      run: |
-        echo "=== Starting deployment ==="
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        
-        echo "=== Creating gh-pages branch ==="
-        git checkout --orphan gh-pages
-        git rm -rf .
-        
-        echo "=== Copying build files ==="
-        cp -r ./student-vue/dist/* .
-        
-        echo "=== Checking files to commit ==="
-        ls -la
-        
-        echo "=== Committing changes ==="
-        git add .
-        git commit -m "Deploy to GitHub Pages"
-        
-        echo "=== Pushing to gh-pages branch ==="
-        git push -f origin gh-pages
+    - name: Deploy using gh-pages action
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./student-vue/dist
+        publish_branch: gh-pages
+        force_orphan: true
+        allow_empty_commit: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        full_commit_message: 'Deploy to GitHub Pages'
       
     - name: Verify deployment
       run: |
