@@ -38,7 +38,8 @@ ENV SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.H2Dialect
 ENV JAVA_OPTS="-Xmx512m -Xms256m -Djava.net.preferIPv4Stack=true -Dlogging.level.org.springframework=INFO"
 
 # 创建启动脚本
-RUN echo '#!/bin/sh
+RUN cat > start.sh << 'EOF'
+#!/bin/sh
 
 echo "========================================"
 echo "Starting Student Management Application"
@@ -87,7 +88,10 @@ fi
 
 # 等待应用进程结束
 wait $APP_PID
-' > start.sh && chmod +x start.sh
+EOF
+
+# 添加执行权限
+RUN chmod +x start.sh
 
 # 运行应用
 ENTRYPOINT ["sh", "start.sh"]
