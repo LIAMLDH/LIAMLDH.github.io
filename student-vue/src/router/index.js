@@ -9,13 +9,20 @@ import CourseManagement from '../views/CourseManagement.vue' // 课程管理页�
 import MajorManagement from '../views/MajorManagement.vue' // 专业管理页面
 import AccountManagement from '../views/AccountManagement.vue' // 账户管理页面
 import EnrollmentQuery from '../views/EnrollmentQuery.vue' // 选课查询页面
+import NovelReader from '../views/NovelReader.vue' // 小说阅读页面
 
 // 定义路由配置
 const routes = [
-  // 首页路由配置，重定向到登录页面
+  // 首页路由配置，重定向到小说阅读页面
   {
     path: '/',
-    redirect: '/user/login'
+    redirect: '/novel'
+  },
+  // 小说阅读页面路由配置
+  {
+    path: '/novel',
+    name: 'NovelReader',
+    component: NovelReader
   },
   // 登录页面路由配置
   {
