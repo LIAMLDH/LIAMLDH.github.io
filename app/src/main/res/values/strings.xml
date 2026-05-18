@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">粉笔题库采集</string>
+    <string name="service_description">后台运行，自动捕获粉笔App中的题目</string>
+    <string name="notification_channel_name">题库采集服务</string>
+    <string name="notification_channel_description">显示服务运行状态</string>
+    <string name="service_running">正在采集题目...</string>
+    <string name="start_service">启动服务</string>
+    <string name="stop_service">停止服务</string>
+    <string name="total_collected">已采集</string>
+    <string name="questions">题</string>
+    <string name="export_data">导出题库</string>
+    <string name="clear_data">清空题库</string>
+    <string name="settings">设置</string>
+    <string name="about">关于</string>
+    <string name="accessibility_permission_required">需要开启无障碍服务权限</string>
+    <string name="go_to_settings">前往设置</string>
+    <string name="export_success">导出成功</string>
+    <string name="export_failed">导出失败</string>
+    <string name="clear_confirm">确定要清空所有题目吗？</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+</resources>
